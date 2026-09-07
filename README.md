@@ -59,7 +59,18 @@ This ensured that networking and SSH were working before introducing Ansible.
 
 ## Ansible Configuration
 
-To be completed.
+Ansible runs from WSL/Ubuntu and connects to the EC2 instance using SSH.
+
+The Ansible playbook automatically:
+
+- Updates the Ubuntu package cache
+- Installs Nginx
+- Starts and enables the Nginx service
+- Deploys the custom "Hello, World!" webpage
+
+Connectivity was validated using the Ansible ping module before running the playbook.
+
+The playbook was executed twice to verify idempotency. The first run configured the server with `changed=3`, while the second completed with `changed=0`, confirming that Ansible did not make unnecessary changes once the desired configuration was reached.
 
 ## Website Validation
 
