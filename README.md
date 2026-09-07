@@ -26,11 +26,30 @@ Terraform is used to provision the AWS infrastructure, including an EC2 instance
 
 ## Prerequisites
 
-To be completed.
+- AWS account and configured AWS CLI
+- Terraform
+- Ansible running through WSL/Ubuntu
+- Git
+- Existing AWS EC2 key pair for SSH access
 
 ## Infrastructure Deployment
 
-To be completed.
+Terraform provisions the AWS infrastructure required for the project:
+
+- EC2 instance running Ubuntu
+- S3 bucket
+- IAM role and instance profile for EC2
+- S3 permissions using least-privilege access
+- Security group allowing HTTP on port 80
+- SSH access on port 22 restricted to a trusted IP
+- Public IP and DNS outputs for the EC2 instance
+
+The infrastructure is deployed using:
+
+1. `terraform init`
+2. `terraform validate`
+3. `terraform plan`
+4. `terraform apply`
 
 ## Ansible Configuration
 
@@ -42,4 +61,6 @@ To be completed.
 
 ## Cleanup
 
-To be completed.
+Infrastructure can be removed after testing using:
+
+`terraform destroy`
