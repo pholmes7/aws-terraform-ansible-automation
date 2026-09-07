@@ -4,7 +4,7 @@
 
 This project demonstrates Infrastructure as Code (IaC) and configuration management using Terraform and Ansible on AWS.
 
-Terraform is used to provision the AWS infrastructure, including an EC2 instance, S3 bucket, IAM resources, and security groups. Ansible is used to configure the EC2 instance, install a web server, and deploy a simple "Hello, World!" webpage.
+Terraform provisions the AWS infrastructure, including an EC2 instance, S3 bucket, IAM resources, and security groups. Ansible configures the EC2 instance, installs Nginx, and deploys a simple "Hello, World!" webpage.
 
 ## Technologies Used
 
@@ -17,11 +17,12 @@ Terraform is used to provision the AWS infrastructure, including an EC2 instance
 - Nginx
 - Git
 - GitHub
+- WSL / Ubuntu
 
 ## Project Structure
 
-- `terraform/` - Terraform infrastructure configuration
-- `ansible/` - Ansible configuration and web files
+- `terraform/` - AWS infrastructure configuration
+- `ansible/` - Server configuration and web files
 - `README.md` - Project documentation
 
 ## Prerequisites
@@ -30,26 +31,31 @@ Terraform is used to provision the AWS infrastructure, including an EC2 instance
 - Terraform
 - Ansible running through WSL/Ubuntu
 - Git
-- Existing AWS EC2 key pair for SSH access
+- AWS EC2 key pair for SSH access
 
 ## Infrastructure Deployment
 
-Terraform provisions the AWS infrastructure required for the project:
+Terraform provisions:
 
-- EC2 instance running Ubuntu
+- Ubuntu EC2 instance
 - S3 bucket
-- IAM role and instance profile for EC2
-- S3 permissions using least-privilege access
-- Security group allowing HTTP on port 80
-- SSH access on port 22 restricted to a trusted IP
-- Public IP and DNS outputs for the EC2 instance
+- IAM role and EC2 instance profile
+- Least-privilege S3 permissions
+- Security group for HTTP and restricted SSH access
+- Public IP and DNS outputs
 
-The infrastructure is deployed using:
+Infrastructure is formatted, initialized, validated, planned, and deployed using the standard Terraform workflow.
 
-1. `terraform init`
-2. `terraform validate`
-3. `terraform plan`
-4. `terraform apply`
+## EC2 & SSH Validation
+
+Before using Ansible, the EC2 infrastructure was validated independently.
+
+- Confirmed the EC2 instance was running with a public IP.
+- Verified HTTP, SSH, and outbound security group rules.
+- Connected manually from WSL/Ubuntu using SSH.
+- Confirmed the Ubuntu server could reach external package repositories.
+
+This ensured that networking and SSH were working before introducing Ansible.
 
 ## Ansible Configuration
 
@@ -61,6 +67,4 @@ To be completed.
 
 ## Cleanup
 
-Infrastructure can be removed after testing using:
-
-`terraform destroy`
+Infrastructure can be removed after testing using `terraform destroy`.
